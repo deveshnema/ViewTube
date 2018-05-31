@@ -19,6 +19,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         let layout = UICollectionViewFlowLayout()
         window?.rootViewController = UINavigationController(rootViewController: HomeController(collectionViewLayout: layout))
+      
+        UINavigationBar.appearance().barTintColor = UIColor(red: 230/255, green: 32/255, blue: 31/255, alpha: 1)
+        application.statusBarStyle = .lightContent
+        
+        let statusbarBackgroundView = UIView()
+        statusbarBackgroundView.backgroundColor = UIColor(red: 194/255, green: 31/255, blue: 31/255, alpha: 1)
+        window?.addSubview(statusbarBackgroundView)
+        statusbarBackgroundView.translatesAutoresizingMaskIntoConstraints = false
+        statusbarBackgroundView.topAnchor.constraint(equalTo: (window?.topAnchor)!).isActive = true
+        statusbarBackgroundView.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        statusbarBackgroundView.leadingAnchor.constraint(equalTo: (window?.leadingAnchor)!).isActive = true
+        statusbarBackgroundView.trailingAnchor.constraint(equalTo: (window?.trailingAnchor)!).isActive = true
+
         return true
     }
 
