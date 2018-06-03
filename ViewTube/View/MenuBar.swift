@@ -36,6 +36,34 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
         let selectedIndexPath = IndexPath(item: 0, section: 0)
         collectionView.selectItem(at: selectedIndexPath, animated: false, scrollPosition: UICollectionViewScrollPosition.left)
         
+        //create the horizontal white bar that appears below the selected menu items
+        setupWhiteHorizontalBar()
+    }
+    
+    var horizontalBarLeftAnchorConstraint : NSLayoutConstraint?
+    
+    func setupWhiteHorizontalBar() {
+        let horizontalBar = UIView()
+        horizontalBar.backgroundColor = UIColor.white
+        horizontalBar.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(horizontalBar)
+        
+        horizontalBarLeftAnchorConstraint = horizontalBar.leftAnchor.constraint(equalTo: leftAnchor)
+        horizontalBarLeftAnchorConstraint?.isActive = true
+        horizontalBar.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        horizontalBar.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1/5).isActive = true
+        horizontalBar.heightAnchor.constraint(equalToConstant: 2).isActive = true
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let x = CGFloat(indexPath.item) * (frame.width/5)
+        horizontalBarLeftAnchorConstraint?.constant = x
+        
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: UIViewAnimationOptions.curveEaseOut, animations: {
+            self.layoutIfNeeded()
+        }, completion: nil)
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

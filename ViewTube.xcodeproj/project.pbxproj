@@ -62,18 +62,42 @@
 		957A098F20BFA77900B98946 /* ViewTube */ = {
 			isa = PBXGroup;
 			children = (
-				957A099020BFA77900B98946 /* AppDelegate.swift */,
+				957A099C20BFA77B00B98946 /* Info.plist */,
+				95B7135220C3695F0010789F /* Controllers */,
+				95B7135320C3697B0010789F /* View */,
+				95B7135420C369930010789F /* Supporting Files */,
+			);
+			path = ViewTube;
+			sourceTree = "<group>";
+		};
+		95B7135220C3695F0010789F /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
 				957A099220BFA77900B98946 /* HomeController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		95B7135320C3697B0010789F /* View */ = {
+			isa = PBXGroup;
+			children = (
 				957A09A220BFAD9D00B98946 /* VideoCell.swift */,
 				955963FB20C25A5C007AD827 /* MenuCell.swift */,
 				955963FD20C25A71007AD827 /* BaseCell.swift */,
 				955963F920C25237007AD827 /* MenuBar.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		95B7135420C369930010789F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				957A099020BFA77900B98946 /* AppDelegate.swift */,
 				957A099420BFA77A00B98946 /* Main.storyboard */,
 				957A099720BFA77B00B98946 /* Assets.xcassets */,
 				957A099920BFA77B00B98946 /* LaunchScreen.storyboard */,
-				957A099C20BFA77B00B98946 /* Info.plist */,
 			);
-			path = ViewTube;
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

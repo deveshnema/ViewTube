@@ -14,11 +14,10 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "Home"
         navigationController?.navigationBar.isTranslucent = false
         
         let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width - 32 , height: view.frame.height))
-        titleLabel.text = "Home"
+        titleLabel.text = "  Home"
         titleLabel.textColor = UIColor.white
         titleLabel.font = UIFont.systemFont(ofSize: 20)
         navigationItem.titleView = titleLabel
@@ -28,6 +27,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         collectionView?.contentInset = UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0)
         collectionView?.scrollIndicatorInsets = UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0)
         setupMenuBar()
+        setNavBarButtons()
     }
 
     let menuBar : MenuBar = {
@@ -37,11 +37,37 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }()
     
     func setupMenuBar() {
+        navigationController?.hidesBarsOnSwipe = true
+        let redView = UIView()
+        redView.backgroundColor = UIColor(red: 230/255, green: 32/255, blue: 31/255, alpha: 1)
+        redView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(redView)
+        redView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        redView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        redView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        
         view.addSubview(menuBar)
         menuBar.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         menuBar.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         menuBar.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        menuBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
     }
+    
+    func setNavBarButtons() {
+        let searchButton = UIBarButtonItem(image: UIImage(named: "search")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), style: UIBarButtonItemStyle.plain, target: self, action: #selector(handleSearch))
+        let moreButton = UIBarButtonItem(image: UIImage(named: "more")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), style: UIBarButtonItemStyle.plain, target: self, action: #selector(handleMore))
+        navigationItem.rightBarButtonItems = [moreButton, searchButton]
+    }
+    
+    @objc func handleSearch() {
+        
+    }
+    
+    @objc func handleMore() {
+        
+    }
+    
+    
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 5

@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.addSubview(statusbarBackgroundView)
         statusbarBackgroundView.translatesAutoresizingMaskIntoConstraints = false
         statusbarBackgroundView.topAnchor.constraint(equalTo: (window?.topAnchor)!).isActive = true
-        statusbarBackgroundView.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        statusbarBackgroundView.heightAnchor.constraint(equalToConstant: 40).isActive = true
         statusbarBackgroundView.leadingAnchor.constraint(equalTo: (window?.leadingAnchor)!).isActive = true
         statusbarBackgroundView.trailingAnchor.constraint(equalTo: (window?.trailingAnchor)!).isActive = true
 
