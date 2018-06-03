@@ -20,6 +20,8 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
         return cv
     }()
     
+    var homeController: HomeController?
+    
     let images = ["home", "trending", "subscriptions", "bell", "library"]
     
     override init(frame: CGRect) {
@@ -57,13 +59,7 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let x = CGFloat(indexPath.item) * (frame.width/5)
-        horizontalBarLeftAnchorConstraint?.constant = x
-        
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: UIViewAnimationOptions.curveEaseOut, animations: {
-            self.layoutIfNeeded()
-        }, completion: nil)
-        
+        homeController?.scrollToMenuIndex(menuIndex: indexPath.item)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
