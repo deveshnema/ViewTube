@@ -16,6 +16,7 @@
 		957A099820BFA77B00B98946 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 957A099720BFA77B00B98946 /* Assets.xcassets */; };
 		957A099B20BFA77B00B98946 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 957A099920BFA77B00B98946 /* LaunchScreen.storyboard */; };
 		957A09A320BFAD9D00B98946 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957A09A220BFAD9D00B98946 /* VideoCell.swift */; };
+		95B7135620C38BC90010789F /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B7135520C38BC90010789F /* FeedCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		957A099A20BFA77B00B98946 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		957A099C20BFA77B00B98946 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		957A09A220BFAD9D00B98946 /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
+		95B7135520C38BC90010789F /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				957A09A220BFAD9D00B98946 /* VideoCell.swift */,
+				95B7135520C38BC90010789F /* FeedCell.swift */,
 				955963FB20C25A5C007AD827 /* MenuCell.swift */,
 				955963FD20C25A71007AD827 /* BaseCell.swift */,
 				955963F920C25237007AD827 /* MenuBar.swift */,
@@ -171,6 +174,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95B7135620C38BC90010789F /* FeedCell.swift in Sources */,
 				957A099320BFA77900B98946 /* HomeController.swift in Sources */,
 				955963FC20C25A5C007AD827 /* MenuCell.swift in Sources */,
 				957A099120BFA77900B98946 /* AppDelegate.swift in Sources */,

@@ -22,7 +22,7 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
     
     var homeController: HomeController?
     
-    let images = ["home", "trending", "subscriptions", "bell", "library"]
+    let images = ["home", "trending", "subscriptions", "notifications", "library"]
     
     override init(frame: CGRect) {
         super.init(frame: frame)
