@@ -32,9 +32,6 @@ class FeedCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataSource, 
         collectionView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
     
-   
-    
-    
          func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
             return 5
         }
@@ -52,5 +49,10 @@ class FeedCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataSource, 
         func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
             return 0
         }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vl = VideoLauncher()
+        vl.showVideoPlayer()
+    }
     
 }

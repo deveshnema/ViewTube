@@ -83,7 +83,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         let indexPath = IndexPath(item: menuIndex, section: 0)
         collectionView?.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.left, animated: true)
         if let titleLabel = navigationItem.titleView as? UILabel {
-            titleLabel.text = menuBar.images[menuIndex]
+            titleLabel.text = menuBar.images[menuIndex].capitalizingFirstLetter()
         }
     }
     
@@ -116,11 +116,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         let indexPath = IndexPath(item: Int(index), section: 0)
         menuBar.collectionView.selectItem(at: indexPath, animated: true, scrollPosition: UICollectionViewScrollPosition.left)
         if let titleLabel = navigationItem.titleView as? UILabel {
-            titleLabel.text = menuBar.images[Int(index)]
+            titleLabel.text = menuBar.images[Int(index)].capitalizingFirstLetter()
         }
     }
-    
-
 }
-
 
