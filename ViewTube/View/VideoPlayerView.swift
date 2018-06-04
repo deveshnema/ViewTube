@@ -28,6 +28,15 @@ class VideoPlayerView: UIView {
         return label
     }()
     
+    let currentTimeLabel : UILabel = {
+        let label = UILabel()
+        label.text = "00.00"
+        label.textColor = UIColor.white
+        label.font = UIFont.boldSystemFont(ofSize: 14)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     let videoSlider : UISlider = {
         let slider = UISlider()
         slider.minimumTrackTintColor = UIColor.red
@@ -39,7 +48,6 @@ class VideoPlayerView: UIView {
     }()
     
     @objc func handleSliderChanged() {
-        
         if let duration = player?.currentItem?.duration {
             let totalSeconds = CMTimeGetSeconds(duration)
             let value = Float64(videoSlider.value) * totalSeconds
@@ -103,6 +111,21 @@ class VideoPlayerView: UIView {
             playerLayer.frame = self.frame
             player?.play()
             player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: NSKeyValueObservingOptions.new, context: nil)
+            
+            //track player progress, to update currentTimeLabel and also to move the scrubber/slider
+            let interval = CMTime(value: 1, timescale: 2)
+            player?.addPeriodicTimeObserver(forInterval: interval, queue: DispatchQueue.main, using: { (progresstime) in
+                let seconds = CMTimeGetSeconds(progresstime)
+                let secondsString = String(format: "%02d", Int(seconds) % 60)
+                let minutesString = String(format: "%02d", Int(seconds) / 60)
+                self.currentTimeLabel.text = "\(minutesString):\(secondsString)"
+                
+                //move the slider
+                if let duration = self.player?.currentItem?.duration {
+                    let durationInSeconds = CMTimeGetSeconds(duration)
+                    self.videoSlider.value = Float(seconds / durationInSeconds)
+                }
+            })
         }
     }
     
@@ -147,15 +170,21 @@ class VideoPlayerView: UIView {
         skipButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
         skipButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
+        controlsContainerView.addSubview(currentTimeLabel)
+        currentTimeLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8).isActive = true
+        currentTimeLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -2).isActive = true
+        currentTimeLabel.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        currentTimeLabel.heightAnchor.constraint(equalToConstant: 24).isActive = true
+        
         controlsContainerView.addSubview(videoLengthLabel)
         videoLengthLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8).isActive = true
-        videoLengthLabel.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        videoLengthLabel.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        videoLengthLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -2).isActive = true
+        videoLengthLabel.widthAnchor.constraint(equalToConstant: 50).isActive = true
         videoLengthLabel.heightAnchor.constraint(equalToConstant: 24).isActive = true
         
         controlsContainerView.addSubview(videoSlider)
+        videoSlider.leadingAnchor.constraint(equalTo: currentTimeLabel.trailingAnchor).isActive = true
         videoSlider.trailingAnchor.constraint(equalTo: videoLengthLabel.leadingAnchor).isActive = true
-        videoSlider.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         videoSlider.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         videoSlider.heightAnchor.constraint(equalToConstant: 30).isActive = true
     }
