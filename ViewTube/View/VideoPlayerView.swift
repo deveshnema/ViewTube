@@ -18,6 +18,38 @@ class VideoPlayerView: UIView {
         return av
     }()
     
+    let videoLengthLabel : UILabel = {
+        let label = UILabel()
+        label.text = "00.00"
+        label.textColor = UIColor.white
+        label.font = UIFont.boldSystemFont(ofSize: 14)
+        label.textAlignment = .right
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let videoSlider : UISlider = {
+        let slider = UISlider()
+        slider.minimumTrackTintColor = UIColor.red
+        slider.maximumTrackTintColor = UIColor.white
+        slider.setThumbImage(UIImage(named: "thumb"), for: UIControlState.normal)
+        slider.addTarget(self, action: #selector(handleSliderChanged), for: UIControlEvents.valueChanged)
+        slider.translatesAutoresizingMaskIntoConstraints = false
+        return slider
+    }()
+    
+    @objc func handleSliderChanged() {
+        
+        if let duration = player?.currentItem?.duration {
+            let totalSeconds = CMTimeGetSeconds(duration)
+            let value = Float64(videoSlider.value) * totalSeconds
+            let seekTime = CMTime(value: Int64(value), timescale: 1)
+            player?.seek(to: seekTime, completionHandler: { (completedSeek) in
+                //do something here
+            })
+        }
+    }
+    
     var isPlaying = false
     
     lazy var playPauseButton : UIButton = {
@@ -81,6 +113,13 @@ class VideoPlayerView: UIView {
             controlsContainerView.backgroundColor = UIColor.clear
             playPauseButton.isHidden = false
             isPlaying = true
+            
+            if let duration = player?.currentItem?.duration {
+                let seconds = CMTimeGetSeconds(duration)
+                let secondText = Int(seconds) % 60
+                let minuteText = String(format: "%02d", Int(seconds) / 60)
+                videoLengthLabel.text = "\(minuteText):\(secondText)"
+            }
         }
     }
     
@@ -107,6 +146,18 @@ class VideoPlayerView: UIView {
         skipButton.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         skipButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
         skipButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        
+        controlsContainerView.addSubview(videoLengthLabel)
+        videoLengthLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8).isActive = true
+        videoLengthLabel.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        videoLengthLabel.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        videoLengthLabel.heightAnchor.constraint(equalToConstant: 24).isActive = true
+        
+        controlsContainerView.addSubview(videoSlider)
+        videoSlider.trailingAnchor.constraint(equalTo: videoLengthLabel.leadingAnchor).isActive = true
+        videoSlider.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        videoSlider.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        videoSlider.heightAnchor.constraint(equalToConstant: 30).isActive = true
     }
     
     required init?(coder aDecoder: NSCoder) {
