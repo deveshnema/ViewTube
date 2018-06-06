@@ -33,19 +33,6 @@ class VideoCell : BaseCell {
                 subtitleTextView.text = subtitleText
             }
             
-            //measure title text
-            if let title = video?.title {
-                let size = CGSize(width: frame.width - 16 - 44 - 8 - 16, height: 1000)
-                let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
-                
-                let estimatedRect = NSString(string: title).boundingRect(with: size, options: options, attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14)], context: nil)
-                
-                if estimatedRect.size.height > 20 {
-                    titleLabelHeightConstraint?.constant = 44
-                } else {
-                    titleLabelHeightConstraint?.constant = 20
-                }
-            }
             
         }
     }
@@ -94,7 +81,6 @@ class VideoCell : BaseCell {
         return tv
     }()
 
-    var titleLabelHeightConstraint: NSLayoutConstraint?
 
     override func setupViews() {
         addSubview(thumbnailImageView)
@@ -115,13 +101,12 @@ class VideoCell : BaseCell {
         titleLabel.topAnchor.constraint(equalTo: profileImageView.topAnchor).isActive = true
         titleLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 8).isActive = true
         titleLabel.trailingAnchor.constraint(equalTo: thumbnailImageView.trailingAnchor).isActive = true
-        titleLabelHeightConstraint = titleLabel.heightAnchor.constraint(equalToConstant: 20)
-        titleLabelHeightConstraint?.isActive = true
+        titleLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
 
         subtitleTextView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 4).isActive = true
         subtitleTextView.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 8).isActive = true
         subtitleTextView.trailingAnchor.constraint(equalTo: thumbnailImageView.trailingAnchor).isActive = true
-        subtitleTextView.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        subtitleTextView.heightAnchor.constraint(equalToConstant: 20).isActive = true
         
         dividerLine.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 16).isActive = true
         dividerLine.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
