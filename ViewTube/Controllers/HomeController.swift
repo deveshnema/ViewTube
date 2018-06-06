@@ -8,8 +8,9 @@
 
 import UIKit
 
-fileprivate let cellid = "cellid"
-fileprivate let newcellid = "newcellid"
+fileprivate let feedcellid = "feedcellid"
+fileprivate let subscriptionCellId = "subscriptionCellId"
+
 
 class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
@@ -34,8 +35,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
             layout.scrollDirection = .horizontal
         }
         collectionView?.isPagingEnabled = true
-        //collectionView?.register(VideoCell.self, forCellWithReuseIdentifier: cellid)
-        collectionView?.register(FeedCell.self, forCellWithReuseIdentifier: newcellid)
+        collectionView?.register(FeedCell.self, forCellWithReuseIdentifier: feedcellid)
+        collectionView?.register(SubscriptionCell.self, forCellWithReuseIdentifier: subscriptionCellId)
 
         collectionView?.contentInset = UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0)
         collectionView?.scrollIndicatorInsets = UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0)
@@ -92,9 +93,21 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: newcellid, for: indexPath)
-        let colors : [UIColor] = [#colorLiteral(red: 0.482165277, green: 0.1738786995, blue: 0.8384277225, alpha: 1), #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1), #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1), #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1), #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)]
-        cell.backgroundColor = colors[indexPath.item]
+        
+        let identifier: String
+        if indexPath.item == 0 {
+            identifier = feedcellid
+        } else if indexPath.item == 2 {
+            identifier = subscriptionCellId
+        } else {
+            //default just use feedcellid
+            identifier = feedcellid
+        }
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
+        
+        //let colors : [UIColor] = [#colorLiteral(red: 0.482165277, green: 0.1738786995, blue: 0.8384277225, alpha: 1), #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1), #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1), #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1), #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)]
+        //cell.backgroundColor = colors[indexPath.item]
         return cell
     }
     

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		95024CEE20C6581E0026503D /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95024CED20C6581E0026503D /* Model.swift */; };
+		95024CF120C65F9A0026503D /* SubscriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95024CF020C65F9A0026503D /* SubscriptionCell.swift */; };
 		955963FA20C25237007AD827 /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955963F920C25237007AD827 /* MenuBar.swift */; };
 		955963FC20C25A5C007AD827 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955963FB20C25A5C007AD827 /* MenuCell.swift */; };
 		955963FE20C25A71007AD827 /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955963FD20C25A71007AD827 /* BaseCell.swift */; };
@@ -23,6 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		95024CED20C6581E0026503D /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		95024CF020C65F9A0026503D /* SubscriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionCell.swift; sourceTree = "<group>"; };
 		955963F920C25237007AD827 /* MenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
 		955963FB20C25A5C007AD827 /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
 		955963FD20C25A71007AD827 /* BaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
@@ -51,6 +55,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		95024CEF20C658280026503D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				95024CED20C6581E0026503D /* Model.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		957A098420BFA77900B98946 = {
 			isa = PBXGroup;
 			children = (
@@ -71,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				957A099C20BFA77B00B98946 /* Info.plist */,
+				95024CEF20C658280026503D /* Model */,
 				95B7135220C3695F0010789F /* Controllers */,
 				95B7135A20C3A56B0010789F /* Helpers */,
 				95B7135320C3697B0010789F /* View */,
@@ -92,6 +105,7 @@
 			children = (
 				957A09A220BFAD9D00B98946 /* VideoCell.swift */,
 				95B7135520C38BC90010789F /* FeedCell.swift */,
+				95024CF020C65F9A0026503D /* SubscriptionCell.swift */,
 				955963FB20C25A5C007AD827 /* MenuCell.swift */,
 				955963FD20C25A71007AD827 /* BaseCell.swift */,
 				955963F920C25237007AD827 /* MenuBar.swift */,
@@ -199,7 +213,9 @@
 				955963FA20C25237007AD827 /* MenuBar.swift in Sources */,
 				955963FE20C25A71007AD827 /* BaseCell.swift in Sources */,
 				957A09A320BFAD9D00B98946 /* VideoCell.swift in Sources */,
+				95024CEE20C6581E0026503D /* Model.swift in Sources */,
 				95B7135820C3A5500010789F /* VideoLauncher.swift in Sources */,
+				95024CF120C65F9A0026503D /* SubscriptionCell.swift in Sources */,
 				95B7135E20C3A7BB0010789F /* VideoPlayerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

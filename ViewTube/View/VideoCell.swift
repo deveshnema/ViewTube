@@ -10,8 +10,48 @@ import UIKit
 
 class VideoCell : BaseCell {
     
-    let thumbnailImageView : UIImageView = {
-        let iv = UIImageView()
+    var video: Video? {
+        didSet {
+            if let title = video?.title {
+                titleLabel.text = title
+            }
+            
+            if let thumbnailImageUrl = video?.thumbnail_image_name {
+                thumbnailImageView.loadImageUsingUrlString(thumbnailImageUrl)
+            }
+            
+            if let profileImageUrl = video?.channel?.profile_image_name {
+                profileImageView.loadImageUsingUrlString(profileImageUrl)
+            }
+            
+            if let channelName = video?.channel?.name, let numberOfViews = video?.number_of_views {
+                
+                let numberFormatter = NumberFormatter()
+                numberFormatter.numberStyle = .decimal
+                let viewsString = numberFormatter.string(from: NSNumber(value: numberOfViews))!
+                let subtitleText = "\(channelName) • \(viewsString) • 2 years ago "
+                subtitleTextView.text = subtitleText
+            }
+            
+            //measure title text
+            if let title = video?.title {
+                let size = CGSize(width: frame.width - 16 - 44 - 8 - 16, height: 1000)
+                let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
+                
+                let estimatedRect = NSString(string: title).boundingRect(with: size, options: options, attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14)], context: nil)
+                
+                if estimatedRect.size.height > 20 {
+                    titleLabelHeightConstraint?.constant = 44
+                } else {
+                    titleLabelHeightConstraint?.constant = 20
+                }
+            }
+            
+        }
+    }
+    
+    let thumbnailImageView : CustomImageView = {
+        let iv = CustomImageView()
         iv.image = UIImage(named: "taylor_thumbnail")
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
@@ -19,8 +59,8 @@ class VideoCell : BaseCell {
         return iv
     }()
     
-    let profileImageView : UIImageView = {
-        let iv = UIImageView()
+    let profileImageView : CustomImageView = {
+        let iv = CustomImageView()
         iv.image = UIImage(named: "taylor_profile")
         iv.contentMode = .scaleAspectFill
         iv.translatesAutoresizingMaskIntoConstraints = false
@@ -53,7 +93,9 @@ class VideoCell : BaseCell {
         tv.translatesAutoresizingMaskIntoConstraints = false
         return tv
     }()
-    
+
+    var titleLabelHeightConstraint: NSLayoutConstraint?
+
     override func setupViews() {
         addSubview(thumbnailImageView)
         addSubview(dividerLine)
@@ -73,7 +115,8 @@ class VideoCell : BaseCell {
         titleLabel.topAnchor.constraint(equalTo: profileImageView.topAnchor).isActive = true
         titleLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 8).isActive = true
         titleLabel.trailingAnchor.constraint(equalTo: thumbnailImageView.trailingAnchor).isActive = true
-        titleLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        titleLabelHeightConstraint = titleLabel.heightAnchor.constraint(equalToConstant: 20)
+        titleLabelHeightConstraint?.isActive = true
 
         subtitleTextView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 4).isActive = true
         subtitleTextView.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 8).isActive = true

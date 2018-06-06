@@ -21,8 +21,33 @@ class FeedCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataSource, 
         return cv
     }()
     
+    var videos: [Video]?
+
+    func fetchVideos(with urlString: String) {
+        guard let url = URL(string: urlString) else {return}
+        URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) -> Void in
+            guard let data = data else { return }
+            if let error = error {
+                print(error)
+                return
+            }
+            
+            do {
+                let decoder = JSONDecoder()
+                self.videos = try decoder.decode([Video].self, from: data)
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
+            } catch let err {
+                print(err)
+            }
+        }) .resume()
+    }
+
     override func setupViews() {
         super.setupViews()
+        fetchVideos(with: "https://s3-us-west-2.amazonaws.com/youtubeassets/home_num_likes.json")
+        
         addSubview(collectionView)
         
         collectionView.register(VideoCell.self, forCellWithReuseIdentifier: cellid)
@@ -33,11 +58,12 @@ class FeedCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataSource, 
     }
     
          func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-            return 5
+            return videos?.count ?? 0
         }
     
          func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellid, for: indexPath) as! VideoCell
+            cell.video = videos?[indexPath.item]
             return cell
         }
     

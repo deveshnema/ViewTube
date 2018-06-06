@@ -13,7 +13,7 @@ class VideoLauncher {
     func showVideoPlayer() {
         if let keywindow = UIApplication.shared.keyWindow {
             let view = UIView(frame: keywindow.frame)
-            view.backgroundColor = UIColor.red
+            view.backgroundColor = UIColor.white
             view.frame = CGRect(x: keywindow.frame.width - 30, y: keywindow.frame.height - 30, width: 30 , height: 30)
             
             let height = keywindow.frame.width * 9 / 16
