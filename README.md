@@ -1,5 +1,7 @@
 # ViewTube
-Youtube clone app in Swift 4
+An iOS (Swift 4) Youtube style App 
+
+(Recreating the design style only to enhance the learning experience)
 
 ## Detail
 - A youtube style App, with custom tabbar for different categories of videos
